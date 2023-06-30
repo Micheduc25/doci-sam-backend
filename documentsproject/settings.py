@@ -12,7 +12,9 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
+import environ
 
+env = environ.Env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -84,9 +86,9 @@ WSGI_APPLICATION = "documentsproject.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
-        "NAME": "documentsdb",
-        "USER": "root",
-        "PASSWORD": "",
+        "NAME": env.str("DB_NAME", default="documentsdb"),
+        "USER": env.str("DB_USER"),
+        "PASSWORD": env.str("DB_PASSWORD", default=""),
         "HOST": "localhost",
         "PORT": "3306",
     }
