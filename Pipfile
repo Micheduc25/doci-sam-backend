@@ -11,7 +11,7 @@ mysqlclient = "*"
 djangorestframework = "*"
 django-cors-headers = "*"
 pillow = "*"
-django-environ = "*"
+django-environ = "0.9.0"
 
 [dev-packages]
 
