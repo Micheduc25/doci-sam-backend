@@ -95,3 +95,27 @@ class FoldersAPIView(APIView):
             return Response(folder_serializer.data)
         except Exception:
             return exceptions.ValidationError()
+
+
+@api_view(["POST"])
+# @permission_classes([permissions.IsAuthenticated])
+def search_documents(request):
+    if (
+        len(request.data.keys()) == 0
+        or "keyword" not in request.data.keys()
+        or request.data["keyword"] is None
+    ):
+        return Response("No keyword was provided", status=400)
+
+    keyword = request.data["keyword"]
+
+    try:
+        matching_documents = Document.objects.filter(
+            Q(title__icontains=keyword) | Q(description__icontains=keyword)
+        )
+
+        doc_serializer = DocumentSerializer(matching_documents, many=True)
+
+        return Response(doc_serializer.data)
+    except Document.DoesNotExist:
+        return Response("No matching document was found", status=404)
