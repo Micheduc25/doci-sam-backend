@@ -155,4 +155,5 @@ AUTH_USER_MODEL = "users.CustomUser"
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
+    "https://doc-manager-micheduc25.vercel.app",
 ]
