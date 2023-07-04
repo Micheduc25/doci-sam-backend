@@ -8,9 +8,7 @@ class UserSerializer(ModelSerializer):
         exclude = [
             "groups",
             "user_permissions",
-            "is_active",
             "is_staff",
-            "is_superuser",
         ]
 
     def to_representation(self, instance):
